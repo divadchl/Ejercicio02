@@ -5,7 +5,8 @@ package mx.com.serviciosinformaticosintegrales.ejercicio1.model;
  */
 public class ModelItem {
 
-    public String strId;
+    public int intId;
+    public String strDescripcion;
     public String strItem;
     public int intResourceId;
 }

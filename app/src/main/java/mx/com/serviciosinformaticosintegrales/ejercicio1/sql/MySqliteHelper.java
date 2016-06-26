@@ -17,6 +17,19 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             COLUMNA_USUARIO + " TEXT NOT NULL," +
             COLUMNA_CONTRASEÑA + " TEXT NOT NULL)";
 
+    public static final String Table_Name = "item_table";
+    public static final String Column_Id = BaseColumns._ID;
+    public static final String Column_Item_Name = "name";
+    public static final String Column_Item_Desc = "description";
+    public static final String Column_Item_Resource = "reosurce_id";
+    private static final String Create_Table = "CREATE TABLE " + Table_Name +
+            "(" + Column_Id + "integer primary key autoincrement, " +
+            Column_Item_Name + " text not null, " +
+            Column_Item_Desc + " text not null, " +
+            Column_Item_Resource + " integer not null";
+
+
+
     public MySqliteHelper(Context   context)
     {
         super(context, BASEDATOS_NOMBRE, null, BASEDATOS_VERSION);
@@ -25,6 +38,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase bd) {
         bd.execSQL(CREAR_TABLA);
+        bd.execSQL(Create_Table);
     }
 
     @Override
