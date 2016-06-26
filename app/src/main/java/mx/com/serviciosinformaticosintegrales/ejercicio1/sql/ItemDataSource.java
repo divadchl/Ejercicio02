@@ -15,11 +15,14 @@ import mx.com.serviciosinformaticosintegrales.ejercicio1.model.ModelUser;
 public class ItemDataSource {
 
     private final SQLiteDatabase bd;
+    private final SQLiteDatabase leerbd;
+    private boolean blnBandera;
 
     public ItemDataSource(Context context)
     {
         MySqliteHelper helper = new MySqliteHelper(context);
         bd = helper.getWritableDatabase();
+        leerbd = helper.getReadableDatabase();
     }
 
     public void guardarUsuario(ModelUser modelUser)
@@ -39,10 +42,17 @@ public class ItemDataSource {
         bd.insert(MySqliteHelper.Table_Name, null, contentValues);
     }
 
-    public void consultarUsuario(ModelUser modelUser)
+    public boolean consultarUsuario(ModelUser modelUser)
     {
-        Cursor cursor = bd.query(MySqliteHelper.NOMBRE_TABLA,null,MySqliteHelper.COLUMNA_ID + "=?",
-                new String[]{String.valueOf(modelUser.intId)},null,null,null);
+
+        Cursor cursor = leerbd.query(MySqliteHelper.NOMBRE_TABLA,null,
+                MySqliteHelper.COLUMNA_USUARIO + "=? AND " + MySqliteHelper.COLUMNA_CONTRASEÑA + "=? ",
+                new String[]{String.valueOf(modelUser.strUsuario), String.valueOf(modelUser.strContraseña)},null,null,null);
+        if (cursor.getCount()>0)
+        {
+            blnBandera= true;
+        }
+        return blnBandera;
     }
 
     public void borrarUsuario(ModelUser modelUser)

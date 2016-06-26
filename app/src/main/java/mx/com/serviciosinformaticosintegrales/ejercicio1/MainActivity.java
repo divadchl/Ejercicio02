@@ -5,14 +5,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import mx.com.serviciosinformaticosintegrales.ejercicio1.model.ModelUser;
+import mx.com.serviciosinformaticosintegrales.ejercicio1.sql.ItemDataSource;
+import mx.com.serviciosinformaticosintegrales.ejercicio1.util.PreferenceUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText edtUsuario;
     private EditText edtContarseña;
     private View prbProgeso;
+    private CheckBox chkRecordar;
+    PreferenceUtil util;
 
 
     @Override
@@ -21,9 +28,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         edtUsuario= (EditText) findViewById(R.id.activity_main_edtUsuario);
         edtContarseña = (EditText) findViewById(R.id.activity_main_edtContraseña);
+        chkRecordar = (CheckBox) findViewById(R.id.chkRecuerdaMe);
         prbProgeso = findViewById(R.id.activity_main_prbProgreso);
         findViewById(R.id.activity_main_btnIngresar).setOnClickListener(this);
         findViewById(R.id.activity_main_btnRegistrarse).setOnClickListener(this);
+        util = new PreferenceUtil(getApplicationContext());
+        ModelUser modelUser = util.obtenerUsuario();
+        if(modelUser != null)
+        {
+            edtUsuario.setText(modelUser.strUsuario);
+            edtContarseña.setText(modelUser.strContraseña);
+            chkRecordar.setChecked(true);
+        }
     }
     //Se utiliza cuando tienes varios botones
     @Override
@@ -49,8 +65,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void run() {
                 prbProgeso.setVisibility(View.GONE);
 
-                if (strUsuario.equals("motitas") && strContraseña.equals("123"))
+                ItemDataSource objItemDataSource = new ItemDataSource(getApplication());
+                ModelUser objModelUser = new ModelUser(strUsuario, strContraseña);
+                //objItemDataSource.consultarUsuario(strUsuario);
+
+                //if (strUsuario.equals("motitas") && strContraseña.equals("123"))
+                if (objItemDataSource.consultarUsuario(objModelUser))
                 {
+                    if(chkRecordar.isChecked())
+                    {
+                        util = new PreferenceUtil(getApplicationContext());
+                        util.guardarUsuario(new ModelUser(strUsuario, strContraseña));
+                    }
                     Toast.makeText(getApplicationContext(), "Iniciando Sesión", Toast.LENGTH_SHORT).show();
                     Intent intent= new Intent(getApplicationContext(),ActivityDetail.class);
                     intent.putExtra("usuario", strUsuario);
