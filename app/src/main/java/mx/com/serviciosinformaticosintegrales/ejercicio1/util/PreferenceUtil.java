@@ -12,6 +12,7 @@ public class PreferenceUtil {
     private final SharedPreferences sp;
     private String fUltimaSesion;
 
+
     public PreferenceUtil(Context context)
     {
         sp=context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
@@ -47,5 +48,10 @@ public class PreferenceUtil {
             return fUltimaSesion="";
         }
         return fUltimaSesion;
+    }
+
+    public void borrarPreferencias()
+    {
+        sp.edit().clear().commit();
     }
 }

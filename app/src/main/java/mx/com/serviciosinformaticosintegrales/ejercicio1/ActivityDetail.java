@@ -7,6 +7,7 @@ import android.view.View;
 
 import mx.com.serviciosinformaticosintegrales.ejercicio1.fragmento.FragmentoLista;
 import mx.com.serviciosinformaticosintegrales.ejercicio1.fragmento.FragmentoPerfil;
+import mx.com.serviciosinformaticosintegrales.ejercicio1.util.PreferenceUtil;
 
 
 public class ActivityDetail extends AppCompatActivity implements View.OnClickListener {
@@ -20,7 +21,7 @@ public class ActivityDetail extends AppCompatActivity implements View.OnClickLis
         //String strSaludo = String.format(getString(R.string.saludo),strUsuario);
         findViewById(R.id.activity_detail_btnFragmento1).setOnClickListener(this);
         findViewById(R.id.activity_detail_btnFragmento2).setOnClickListener(this);
-
+        findViewById(R.id.activity_detail_btnCerrarSesion).setOnClickListener(this);
 
     }
 
@@ -33,6 +34,10 @@ public class ActivityDetail extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.activity_detail_btnFragmento2:
                 cambiarFragmento2();
+                break;
+            case R.id.activity_detail_btnCerrarSesion:
+                cerrarSesion();
+                finish();
                 break;
         }
     }
@@ -53,5 +58,10 @@ public class ActivityDetail extends AppCompatActivity implements View.OnClickLis
         return;
     }
 
+    public void cerrarSesion()
+    {
+        PreferenceUtil util = new PreferenceUtil(getApplication());
+        util.borrarPreferencias();
+    }
 
 }

@@ -10,6 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="mx.com.serviciosinformaticosintegrales.ejercicio1.ActivityDetail">
 
+    <Button
+        android:layout_margin="2dp"
+        android:textAllCaps="false"
+        android:text="Cerra Sesión"
+        android:id="@+id/activity_detail_btnCerrarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

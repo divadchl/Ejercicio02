@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import mx.com.serviciosinformaticosintegrales.ejercicio1.model.ModelUser;
@@ -93,7 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     Date fechaActual = new Date();
-                    util.guardarUltimaSesion(fechaActual.toString());
+                    SimpleDateFormat formateador = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+                    String fechaHora = formateador.format(fechaActual);
+
+                    util.guardarUltimaSesion(fechaHora);
                     Toast.makeText(getApplicationContext(), "Iniciando Sesión", Toast.LENGTH_SHORT).show();
                     Intent intent= new Intent(getApplicationContext(),ActivityDetail.class);
                     intent.putExtra("usuario", strUsuario);
