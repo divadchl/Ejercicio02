@@ -11,6 +11,7 @@ public class PreferenceUtil {
     private static final String FILE_NAME = "preferencias";
     private final SharedPreferences sp;
     private String fUltimaSesion;
+    private int intTiempoUso;
 
 
     public PreferenceUtil(Context context)
@@ -62,13 +63,13 @@ public class PreferenceUtil {
         sp.edit().putInt("tiempoUso", intTiempoUso).apply();
     }
 
-    public String obtenerTiempoUso()
+    public int obtenerTiempoUso()
     {
-        fUltimaSesion = sp.getString("fUltimaSesion", null);
-        if (TextUtils.isEmpty(fUltimaSesion))
+        intTiempoUso = sp.getInt("tiempoUso", 0);
+        if (intTiempoUso==0)
         {
-            return fUltimaSesion="";
+            return intTiempoUso=0;
         }
-        return fUltimaSesion;
+        return intTiempoUso;
     }
 }

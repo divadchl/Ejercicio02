@@ -8,6 +8,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import mx.com.serviciosinformaticosintegrales.ejercicio1.util.PreferenceUtil;
+
 public class ServiceTimer extends Service {
 
     public static final String strTAG = "unam_tag";
@@ -33,6 +35,8 @@ public class ServiceTimer extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(strTAG,"OnstartCommand called");
+        PreferenceUtil util = new PreferenceUtil(getApplication());
+        intCounter = util.obtenerTiempoUso();
         return START_STICKY;
     }
 
@@ -46,6 +50,8 @@ public class ServiceTimer extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        PreferenceUtil util = new PreferenceUtil(getApplication());
+        util.guardarTiempoUso(intCounter);
         Log.d(strTAG,"OnDestroy Servicio");
         handler.removeCallbacks(runnable);
     }
