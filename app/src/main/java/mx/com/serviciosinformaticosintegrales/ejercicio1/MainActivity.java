@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import mx.com.serviciosinformaticosintegrales.ejercicio1.model.ModelUser;
+import mx.com.serviciosinformaticosintegrales.ejercicio1.service.ServiceTimer;
 import mx.com.serviciosinformaticosintegrales.ejercicio1.sql.ItemDataSource;
 import mx.com.serviciosinformaticosintegrales.ejercicio1.util.PreferenceUtil;
 
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent= new Intent(getApplicationContext(),ActivityDetail.class);
                     intent.putExtra("usuario", strUsuario);
                     startActivity(intent);
+                    startService(new Intent(getApplicationContext(), ServiceTimer.class));
                 }
                 else
                 {

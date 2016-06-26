@@ -52,6 +52,23 @@ public class PreferenceUtil {
 
     public void borrarPreferencias()
     {
-        sp.edit().clear().commit();
+        sp.edit().remove("usuario").commit();
+        sp.edit().remove("contraseña").commit();
+        sp.edit().remove("fUltimaSesion").commit();
+    }
+
+    public void guardarTiempoUso(int intTiempoUso)
+    {
+        sp.edit().putInt("tiempoUso", intTiempoUso).apply();
+    }
+
+    public String obtenerTiempoUso()
+    {
+        fUltimaSesion = sp.getString("fUltimaSesion", null);
+        if (TextUtils.isEmpty(fUltimaSesion))
+        {
+            return fUltimaSesion="";
+        }
+        return fUltimaSesion;
     }
 }

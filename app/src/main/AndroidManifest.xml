@@ -18,6 +18,7 @@
         <activity android:name=".ActivityDetail" />
         <activity android:name=".ActivityResumen" />
         <activity android:name=".ActivityRegistro"></activity>
+        <service android:name=".service.ServiceTimer"/>
     </application>
 
 </manifest>
