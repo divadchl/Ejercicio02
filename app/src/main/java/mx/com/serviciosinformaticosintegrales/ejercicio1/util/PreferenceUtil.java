@@ -10,6 +10,7 @@ public class PreferenceUtil {
 
     private static final String FILE_NAME = "preferencias";
     private final SharedPreferences sp;
+    private String fUltimaSesion;
 
     public PreferenceUtil(Context context)
     {
@@ -31,5 +32,20 @@ public class PreferenceUtil {
             return null;
         }
         return new ModelUser(strUsuario, strContraseña);
+    }
+
+    public void guardarUltimaSesion(String fUltimaSesion)
+    {
+        sp.edit().putString("fUltimaSesion", fUltimaSesion).apply();
+    }
+
+    public String obtenerUltimaSesion()
+    {
+        fUltimaSesion = sp.getString("fUltimaSesion", null);
+        if (TextUtils.isEmpty(fUltimaSesion))
+        {
+            return fUltimaSesion="";
+        }
+        return fUltimaSesion;
     }
 }

@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Date;
 
 import mx.com.serviciosinformaticosintegrales.ejercicio1.model.ModelUser;
 import mx.com.serviciosinformaticosintegrales.ejercicio1.sql.ItemDataSource;
@@ -17,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private EditText edtUsuario;
     private EditText edtContarseña;
+    private TextView txvFechaUltimaSesion;
     private View prbProgeso;
     private CheckBox chkRecordar;
     PreferenceUtil util;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         edtContarseña = (EditText) findViewById(R.id.activity_main_edtContraseña);
         chkRecordar = (CheckBox) findViewById(R.id.chkRecuerdaMe);
         prbProgeso = findViewById(R.id.activity_main_prbProgreso);
+        txvFechaUltimaSesion = (TextView) findViewById(R.id.txvFechaUltimaSesion);
         findViewById(R.id.activity_main_btnIngresar).setOnClickListener(this);
         findViewById(R.id.activity_main_btnRegistrarse).setOnClickListener(this);
         util = new PreferenceUtil(getApplicationContext());
@@ -39,6 +44,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             edtUsuario.setText(modelUser.strUsuario);
             edtContarseña.setText(modelUser.strContraseña);
             chkRecordar.setChecked(true);
+        }
+        String strFechaUltimaSesion = util.obtenerUltimaSesion();
+        if (strFechaUltimaSesion == "")
+        {
+            txvFechaUltimaSesion.setText("No se ha iniciado sesión");
+        }
+        else
+        {
+            txvFechaUltimaSesion.setText("Último Inicio de Sesión: " + strFechaUltimaSesion);
         }
     }
     //Se utiliza cuando tienes varios botones
@@ -72,11 +86,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //if (strUsuario.equals("motitas") && strContraseña.equals("123"))
                 if (objItemDataSource.consultarUsuario(objModelUser))
                 {
+                    util = new PreferenceUtil(getApplicationContext());
                     if(chkRecordar.isChecked())
                     {
-                        util = new PreferenceUtil(getApplicationContext());
                         util.guardarUsuario(new ModelUser(strUsuario, strContraseña));
                     }
+
+                    Date fechaActual = new Date();
+                    util.guardarUltimaSesion(fechaActual.toString());
                     Toast.makeText(getApplicationContext(), "Iniciando Sesión", Toast.LENGTH_SHORT).show();
                     Intent intent= new Intent(getApplicationContext(),ActivityDetail.class);
                     intent.putExtra("usuario", strUsuario);

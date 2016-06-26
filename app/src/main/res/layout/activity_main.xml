@@ -11,6 +11,17 @@
     tools:context="mx.com.serviciosinformaticosintegrales.ejercicio1.MainActivity">
 
     <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </LinearLayout>
+    <TextView
+        android:text="hola"
+        android:id="@+id/txvFechaUltimaSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
