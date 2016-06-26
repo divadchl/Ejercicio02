@@ -34,7 +34,7 @@ public class ItemDataSource {
     {
         ContentValues contentValues = new ContentValues();
         contentValues.put(MySqliteHelper.Column_Item_Name,modelItem.strItem);
-        contentValues.put(MySqliteHelper.Column_Item_Desc, modelItem.strDescripcionId);
+        contentValues.put(MySqliteHelper.Column_Item_Desc, modelItem.strDescripcion);
         contentValues.put(MySqliteHelper.Column_Item_Resource, modelItem.intResourceId);
         bd.insert(MySqliteHelper.Table_Name, null, contentValues);
     }

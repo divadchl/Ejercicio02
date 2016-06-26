@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import mx.com.serviciosinformaticosintegrales.ejercicio1.model.ModelUser;
+import mx.com.serviciosinformaticosintegrales.ejercicio1.sql.ItemDataSource;
 import mx.com.serviciosinformaticosintegrales.ejercicio1.util.PreferenceUtil;
 
 public class ActivityRegistro extends AppCompatActivity {
@@ -22,9 +23,11 @@ public class ActivityRegistro extends AppCompatActivity {
             public void onClick(View v) {
                 String strUsuario = edtUsuario.getText().toString();
                 String strContraseña = edtContraseña.getText().toString();
-
-                PreferenceUtil util = new PreferenceUtil(getApplicationContext());
-                util.guardarUsuario(new ModelUser(strUsuario, strContraseña));
+                ModelUser objModelUser = new ModelUser(strUsuario, strContraseña);
+                ItemDataSource objItemDataSource = new ItemDataSource(getApplication());
+                objItemDataSource.guardarUsuario(objModelUser);
+                /*PreferenceUtil util = new PreferenceUtil(getApplicationContext());
+                util.guardarUsuario(new ModelUser(strUsuario, strContraseña));*/
                 finish();
             }
         });

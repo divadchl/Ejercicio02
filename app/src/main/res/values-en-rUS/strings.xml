@@ -3,6 +3,7 @@
     <string name="edtUsuario">User</string>
     <string name="edtContraseña">Password</string>
     <string name="btnIngresar">Sign In</string>
+    <string name="btnRecordarme">Registrarse</string>
     <string name="edtTituloPrincipal">Sign Up</string>
     <string name="btnFragmento1">Fragment 1</string>
     <string name="btnFragmento2">Fragment 2</string>

@@ -10,14 +10,15 @@ import android.widget.TextView;
 import mx.com.serviciosinformaticosintegrales.ejercicio1.R;
 import mx.com.serviciosinformaticosintegrales.ejercicio1.model.ModelItem;
 import java.util.List;
+import com.squareup.picasso.Picasso;
 
-/**
- * Created by David on 17/06/16.
- */
 public class AdapterItemList extends ArrayAdapter<ModelItem> {
+
+    private final String url1="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Biblioteca_Central_UNAM_M%C3%A9xico.jpg/250px-Biblioteca_Central_UNAM_M%C3%A9xico.jpg";
+    private final String url2="https://www.unam.mx/sites/default/files/images/menu/library-345273_1280.jpg";
+
     public AdapterItemList(Context context, List<ModelItem> objects) {
         super(context, 0, objects);
-
     }
 
     @Override
@@ -32,8 +33,10 @@ public class AdapterItemList extends ArrayAdapter<ModelItem> {
 
         ModelItem modelItem=getItem(position);
         txtTitulo.setText(modelItem.strItem);
-        txtDescripcionItem.setText(modelItem.strId);
-        img.setImageResource(modelItem.intResourceId);
+        txtDescripcionItem.setText(modelItem.strDescripcion);
+        Picasso.with(getContext()).load(modelItem.intResourceId==R.drawable.ic_action_face_unlock?
+                url1:url2).into(img);
+        //img.setImageResource(modelItem.intResourceId);
         return convertView;
     }
 }

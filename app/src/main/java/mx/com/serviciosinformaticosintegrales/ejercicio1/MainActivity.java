@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         edtContarseña = (EditText) findViewById(R.id.activity_main_edtContraseña);
         prbProgeso = findViewById(R.id.activity_main_prbProgreso);
         findViewById(R.id.activity_main_btnIngresar).setOnClickListener(this);
+        findViewById(R.id.activity_main_btnRegistrarse).setOnClickListener(this);
     }
     //Se utiliza cuando tienes varios botones
     @Override
@@ -31,6 +32,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.activity_main_btnIngresar:
                 processData();
+                break;
+            case R.id.activity_main_btnRegistrarse:
+                Intent intent = new Intent(getApplicationContext(),ActivityRegistro.class);
+                startActivity(intent);
                 break;
         }
     }

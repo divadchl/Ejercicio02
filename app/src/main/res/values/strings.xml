@@ -3,8 +3,8 @@
     <string name="edtUsuario">Usuario</string>
     <string name="edtContraseña">Contraseña</string>
     <string name="btnIngresar">Ingresar</string>
-    <string name="btnRecordarme">Recordarme</string>
-    <string name="edtTituloPrincipal">Regístrate</string>
+    <string name="btnRecordarme">Registrarse</string>
+    <string name="edtTituloPrincipal">Ingresar</string>
     <string name="btnFragmento1">Fragmento 1</string>
     <string name="btnFragmento2">Fragmento 2</string>
     <string name="saludo" formatted="false">Hola %s bievenido</string>
